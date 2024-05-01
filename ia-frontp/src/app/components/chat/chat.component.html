@@ -1,0 +1,24 @@
+<app-nav></app-nav>
+<div class="chat">
+    <div class="fondo-container" *ngIf="showBackground">
+        <img src="assets/animation_2.gif" alt="Animation" class="animation">
+    </div>
+    <div *ngFor="let message of messages" class="message-container" [ngClass]="{'user-message': message.sender === 'savedUsername', 'bot-message': message.sender === 'RecipeBot'}">
+        <div class="message" [ngClass]="{'user-message': message.sender === 'savedUsername', 'bot-message': message.sender === 'RecipeBot'}">
+            <div class="sender-name">{{ message.sender }}</div>
+            <div class="message-content">{{ message.content }}</div>
+            <div class="message-timestamp">{{ message.timestamp | date:'shortTime' }}</div>
+        </div>
+    </div>
+</div>
+<div class="message-input">
+    <input type="text" [(ngModel)]="newMessage" placeholder="Type your message..." (keyup.enter)="sendMessage()">
+    <input type="file" (change)="onFileSelected($event)" #fileInput style="display: none;">
+    <button mat-fab (click)="fileInput.click()">
+        <mat-icon class="black-icons">image</mat-icon>
+    </button>
+    <button mat-fab (click)="sendMessage()">
+        <mat-icon class="black-icons">send</mat-icon>
+    </button>
+</div>
+<app-footer></app-footer>

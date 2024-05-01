@@ -1,0 +1,23 @@
+.mat-toolbar {
+  background-color: rgb(154, 182, 91);
+  color: rgb(0, 0, 0);
+}
+
+.mat-button {
+  color: rgb(0, 0, 0);
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 100px;
+  height: auto;
+  margin-right: 10px;
+}
