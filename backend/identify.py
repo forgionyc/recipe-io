@@ -61,7 +61,7 @@ def model_predict(image_uri: str):
 
     # Print the prediction
     print(f"It's a {predicted_class} ({confidence_score:.2f}%)")
-    return {"predicted class": predicted_class, "confidence score": confidence_score}
+    return {"predictedClass": predicted_class, "confidenceScore": confidence_score}
 
 
 def multiple_model_predict(file_paths):

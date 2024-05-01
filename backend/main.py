@@ -6,12 +6,20 @@ from typing import List
 import os
 from identify import model_predict
 from werkzeug.utils import secure_filename
+from fastapi.middleware.cors import CORSMiddleware
 
 UPLOAD_FOLDER = "uploads"
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:4200"],  # Reemplaza esto con el origen de tu aplicación Angular
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE"],  # Método HTTP permitido en las solicitudes CORS
+    allow_headers=["Authorization", "Content-Type"],
+)
 
 class Prediction(BaseModel):
     filename: str
