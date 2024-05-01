@@ -4,7 +4,7 @@ from tensorflow import keras
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 from tensorflow.keras.applications.mobilenet import preprocess_input
 
-seq_model = keras.models.load_model("model/mobilenet_model")
+seq_model = keras.models.load_model("model/mobilenet_model.keras")
 seq_model.metrics_names
 
 from typing import List, Tuple
