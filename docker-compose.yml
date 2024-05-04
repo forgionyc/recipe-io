@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  djangoapp:
+    container_name: djangoapp
+    image: luis0724/recipe-io:backend
+    build:
+      context: ./backend
+    ports:
+      - "8000:8000"
+      
+  frontend:
+    image: luis0724/recipe-io:frontend
+    container_name: ia-frontp
+    build:
+      context: ./ia-frontp
+    ports:
+      - "9000:9000"
+    depends_on:
+      - djangoapp
+      
+volumes:
+  pgdata: {}
