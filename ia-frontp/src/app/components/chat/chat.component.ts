@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ChatMessage } from '../../interface/chat-message.interface';
-import { AuthService } from '../../service-api/auth.service';
 import { PredictionModel } from '../../models/prediction.model';
+import { AuthService } from '../../service-api/auth.service';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.css']
+  styleUrls: ['./chat.component.css'],
 })
-export class ChatComponent implements OnInit{
+export class ChatComponent implements OnInit {
   messages: ChatMessage[] = [];
   newMessage: string = '';
   showBackground: boolean = true;
@@ -16,8 +17,7 @@ export class ChatComponent implements OnInit{
   selectedImageUrl: string | ArrayBuffer | null = null;
   selectedImageUrlForMessage: string | ArrayBuffer | null = null;
 
-
-  constructor(private authService: AuthService) { 
+  constructor(private authService: AuthService, private router: Router) {
     this.authService.formDataPrediction = new PredictionModel();
   }
 
@@ -32,7 +32,7 @@ export class ChatComponent implements OnInit{
         sender: this.savedUsername,
         content: this.newMessage,
         image: this.selectedImageUrlForMessage,
-        timestamp: new Date()
+        timestamp: new Date(),
       });
       this.showBackground = true;
       // Respuesta del bot
@@ -46,9 +46,13 @@ export class ChatComponent implements OnInit{
     // Simulación de respuesta del bot
     const botMessage: ChatMessage = {
       sender: 'RecipeBot',
-      content: '¡Hola! Soy un bot y estoy aquí para ayudarte. La imagen que acabas de ingresar es '+  this.authService.formDataPrediction.predictedClass 
-      + " con una precision de: "+  this.authService.formDataPrediction.confidenceScore +" %" ,
-      timestamp: new Date()
+      content:
+        '¡Hola! Soy un bot y estoy aquí para ayudarte. La imagen que acabas de ingresar es ' +
+        this.authService.formDataPrediction.predictedClass +
+        ' con una precision de: ' +
+        this.authService.formDataPrediction.confidenceScore +
+        ' %',
+      timestamp: new Date(),
     };
     this.messages.push(botMessage);
   }
@@ -59,21 +63,28 @@ export class ChatComponent implements OnInit{
       const reader = new FileReader();
       reader.readAsDataURL(selectedFile);
       reader.onload = () => {
-          this.selectedImageUrl = reader.result;
-          this.selectedImageUrlForMessage = reader.result;
+        this.selectedImageUrl = reader.result;
+        this.selectedImageUrlForMessage = reader.result;
       };
     }
     this.authService.postImage(selectedFile).subscribe(
-        (response) => {
-            console.log('Respuesta del servidor:', response);
-            this.authService.formDataPrediction = response;
-        },
-        (error) => {
-            console.error('Error al enviar la imagen:', error);
-        }
+      (response) => {
+        console.log('Respuesta del servidor:', response);
+        this.authService.formDataPrediction = response;
+      },
+      (error) => {
+        console.error('Error al enviar la imagen:', error);
+      }
     );
   }
-  
-  
+  saveRecipe() {
+    const botMessageIndex = this.messages.findIndex(
+      (message) => message.sender === 'RecipeBot'
+    );
+    if (botMessageIndex !== -1) {
+      const currentBotMessage = this.messages[botMessageIndex];
+      localStorage.setItem('savedRecipe', currentBotMessage.content);
+      this.router.navigate(['/create']);
+    }
+  }
 }
-
