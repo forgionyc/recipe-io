@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Recipe } from '../../interface/recipe';
 
 @Component({
@@ -21,11 +22,12 @@ export class CreateRecipeComponent implements OnInit {
     content: ''
   };
 
-  constructor() {}
+  constructor(private Router: Router) {}
 
   submitForm() {
     this.recipe.content = this.scontent || '';
     console.log('Receta guardada:', this.recipe);
     localStorage.setItem('savedRecipe', JSON.stringify(this.recipe));
+    this.Router.navigate(['/chat']);
   }
 }
