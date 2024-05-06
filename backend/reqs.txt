@@ -131,6 +131,8 @@ rich==13.7.1
 rsa==4.9
 ruff==0.4.3
 safetensors==0.4.3
+safety==3.2.0
+safety-schemas==0.0.2
 scipy==1.13.0
 six==1.16.0
 sniffio==1.3.1
