@@ -30,4 +30,15 @@ export class AuthService {
       headers,
     });
   }
+
+  /**
+   * Sends a POST request to the chat endpoint to get a response.
+   * @param message - The message to be sent to the chat endpoint.
+   * @returns {Observable<any>} - An observable of the HTTP response.
+   */
+  postChat(message: string) {
+    return this.http.post<{ response: string }>(`${this.apiUrl}/api/chat`, { message });
+  }
+
+
 }
