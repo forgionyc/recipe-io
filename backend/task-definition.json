@@ -1,0 +1,70 @@
+{
+    "taskDefinitionArn": "arn:aws:ecs:us-east-2:975049915455:task-definition/recipe_io_backend:4",
+    "containerDefinitions": [
+        {
+            "name": "recipe_io_backend_image",
+            "image": "devtest95/recipe-io-app",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "name": "fast_api_app",
+                    "containerPort": 80,
+                    "hostPort": 80,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                },
+                {
+                    "name": "fast_api_",
+                    "containerPort": 8000,
+                    "hostPort": 8000,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                }
+            ],
+            "essential": true,
+            "environment": [],
+            "environmentFiles": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "ulimits": [],
+            "systemControls": []
+        }
+    ],
+    "family": "recipe_io_backend",
+    "executionRoleArn": "arn:aws:iam::975049915455:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "revision": 4,
+    "volumes": [],
+    "status": "ACTIVE",
+    "requiresAttributes": [
+        {
+            "name": "ecs.capability.extensible-ephemeral-storage"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        }
+    ],
+    "placementConstraints": [],
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "4096",
+    "memory": "8192",
+    "ephemeralStorage": {
+        "sizeInGiB": 25
+    },
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "registeredAt": "2024-05-07T17:19:08.702Z",
+    "registeredBy": "arn:aws:iam::975049915455:user/carlos_guerrero",
+    "tags": []
+}
