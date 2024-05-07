@@ -5,10 +5,9 @@ import { Recipe } from '../../interface/recipe';
 @Component({
   selector: 'app-create-recipe',
   templateUrl: './create-recipe.component.html',
-  styleUrls: ['./create-recipe.component.css']
+  styleUrls: ['./create-recipe.component.css'],
 })
 export class CreateRecipeComponent implements OnInit {
-
   scontent: string | null = null; // Corregido aquí
 
   ngOnInit() {
@@ -19,7 +18,7 @@ export class CreateRecipeComponent implements OnInit {
     name: '',
     date: new Date(),
     description: '',
-    content: ''
+    content: '',
   };
 
   constructor(private Router: Router) {}

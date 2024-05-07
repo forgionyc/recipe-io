@@ -4,20 +4,20 @@ import { Recipe } from '../../interface/recipe';
 @Component({
   selector: 'app-recipe-detail',
   templateUrl: './recipe-detail.component.html',
-  styleUrl: './recipe-detail.component.css'
+  styleUrl: './recipe-detail.component.css',
 })
 export class RecipeDetailComponent implements OnInit {
   recipe!: Recipe;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     //EJEMPLO!
     this.recipe = {
       name: 'Tuna Stuffed Potatoes',
       date: new Date(),
-      description:'Tuna with potatotes',
-      content:`
+      description: 'Tuna with potatotes',
+      content: `
       **Tuna Stuffed Potatoes:**
       
       **Ingredients:**
@@ -49,9 +49,7 @@ export class RecipeDetailComponent implements OnInit {
       
       9. Serve the hot Tuna Stuffed Potatoes and enjoy!
       
-    `
+    `,
     };
-
   }
-
 }
