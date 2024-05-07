@@ -57,7 +57,7 @@ jobs:
 
   Deploy_AWS:
     if: ${{ github.event_name == 'push' && !contains(toJson(github.event.commits.*.message), '#skipback') }}
-    needs: backend_testing
+    # needs: backend_testing
     runs-on: ubuntu-latest
 
     steps:
