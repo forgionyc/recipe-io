@@ -1,4 +1,4 @@
-name: FrontEnd Pipeline
+name: ia-frontp Pipeline
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       types: [opened, synchronize]
 
 jobs:
-  frontend_testing:
+  ia-frontp_testing:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -19,26 +19,26 @@ jobs:
 
       - name: Check directory
         run: |
-          cd frontend
+          cd ia-frontp
           pwd
           ls -l
 
       - name: Install dependencies
         run: |
-          cd frontend
+          cd ia-frontp
           npm install
 
       - name: Audit dependencies
         run: |
-          cd frontend
+          cd ia-frontp
           npm audit
 
       - name: Prettier code
         run: |
-          cd frontend
+          cd ia-frontp
           npm run prettier
 
       - name: Lint code
         run: |
-          cd frontend
+          cd ia-frontp
           npm run lint
