@@ -46,18 +46,27 @@ export class ChatComponent implements OnInit {
   }
 
   botResponse() {
-    // Simulación de respuesta del bot
-    const botMessage: ChatMessage = {
-      sender: 'RecipeBot',
-      content:
-        '¡Hola! Soy un bot y estoy aquí para ayudarte. La imagen que acabas de ingresar es ' +
-        this.authService.formDataPrediction.predictedClass +
-        ' con una precision de: ' +
-        this.authService.formDataPrediction.confidenceScore +
-        ' %',
-      timestamp: new Date(),
-    };
-    this.messages.push(botMessage);
+    
+    const infoVegetable:string = this.messages[this.messages.length - 1].content +'.The vegetable is: '+ this.authService.formDataPrediction.predictedClass;
+    console.log(infoVegetable);
+    console.log(this.messages);
+    // Llama al servicio para obtener la respuesta del chatbot
+    this.authService.postChat(infoVegetable).subscribe(
+      (response) => {
+        // Crea un objeto ChatMessage con la respuesta del chatbot
+        const botMessage: ChatMessage = {
+          sender: 'RecipeBot',
+          content: response.response, // Utiliza la respuesta del chatbot aquí
+          timestamp: new Date(),
+        };
+  
+        // Agrega el mensaje del bot a la lista de mensajes
+        this.messages.push(botMessage);
+      },
+      (error) => {
+        console.error('Error al obtener la respuesta del chatbot:', error);
+      }
+    );
   }
 
   onFileSelected(event: any) {
@@ -80,6 +89,7 @@ export class ChatComponent implements OnInit {
       },
     );
   }
+
   saveRecipe() {
     const botMessageIndex = this.messages.findIndex(
       (message) => message.sender === 'RecipeBot',
