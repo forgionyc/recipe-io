@@ -46,8 +46,12 @@ export class ChatComponent implements OnInit {
   }
 
   botResponse() {
+    
+    const infoVegetable:string = this.messages[this.messages.length - 1].content +'.The vegetable is: '+ this.authService.formDataPrediction.predictedClass;
+    console.log(infoVegetable);
+    console.log(this.messages);
     // Llama al servicio para obtener la respuesta del chatbot
-    this.authService.postChat(this.newMessage).subscribe(
+    this.authService.postChat(infoVegetable).subscribe(
       (response) => {
         // Crea un objeto ChatMessage con la respuesta del chatbot
         const botMessage: ChatMessage = {
@@ -85,6 +89,7 @@ export class ChatComponent implements OnInit {
       },
     );
   }
+
   saveRecipe() {
     const botMessageIndex = this.messages.findIndex(
       (message) => message.sender === 'RecipeBot',
