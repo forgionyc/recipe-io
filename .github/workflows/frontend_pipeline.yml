@@ -1,0 +1,44 @@
+name: ia-frontp Pipeline
+
+on:
+  push:
+    branches:
+      - main
+    pull_request:
+      branches: [main]
+      types: [opened, synchronize]
+
+jobs:
+  ia-frontp_testing:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Check directory
+        run: |
+          cd ia-frontp
+          pwd
+          ls -l
+
+      - name: Install dependencies
+        run: |
+          cd ia-frontp
+          npm install
+
+      - name: Audit dependencies
+        run: |
+          cd ia-frontp
+          npm audit
+
+      - name: Prettier code
+        run: |
+          cd ia-frontp
+          npm run prettier
+
+      - name: Lint code
+        run: |
+          cd ia-frontp
+          npm run lint

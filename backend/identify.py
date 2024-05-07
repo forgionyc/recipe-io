@@ -1,13 +1,13 @@
 from typing import List, Tuple
+
 import numpy as np
 from tensorflow import keras
-from tensorflow.keras.preprocessing.image import load_img, img_to_array
 from tensorflow.keras.applications.mobilenet import preprocess_input
+from tensorflow.keras.preprocessing.image import img_to_array, load_img
 
 seq_model = keras.models.load_model("model/mobilenet_model.keras")
 seq_model.metrics_names
 
-from typing import List, Tuple
 
 class_labels = [
     "Bean",
@@ -45,7 +45,6 @@ def translate_pred(prediction: np.array, class_labels: List[str]) -> Tuple[str, 
 
 
 def model_predict(image_uri: str):
-
     # Load the image
     img_width, img_height = 224, 224
     my_image = load_img(image_uri, target_size=(img_width, img_height))

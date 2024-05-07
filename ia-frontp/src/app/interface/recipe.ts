@@ -1,6 +1,6 @@
-
 export interface Recipe {
-    name: string;
-    date: Date;
-    description: string;
+  name: string;
+  date: Date;
+  description: string;
+  content: string;
 }
