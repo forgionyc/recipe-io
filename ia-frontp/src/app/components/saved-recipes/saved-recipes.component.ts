@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Recipe } from '../../interface/recipe';
-import { RecipeService } from '../../service-api/recipe.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
@@ -11,24 +10,37 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
   templateUrl: './saved-recipes.component.html',
   styleUrls: ['./saved-recipes.component.css'],
 })
-export class SavedRecipesComponent implements OnInit {
-  ngOnInit(): void {
-    this.getUserRecipes();
-  }
-  userRecipes: any[] = [];
-  recipeid: string = '';
+export class SavedRecipesComponent {
+  savedRecipes: Recipe[] = [
+    {
+      name: 'Recipe 1',
+      date: new Date('2022-04-24'),
+      content: 'Test',
+      description: 'Description of Recipe 1',
+    },
+    {
+      name: 'Recipe 2',
+      date: new Date('2022-04-24'),
+      content: 'Test',
+      description: 'Description of Recipe 2',
+    },
+    {
+      name: 'Recipe 3',
+      date: new Date('2022-04-24'),
+      content: 'Test',
+      description: 'Description of Recipe 3',
+    },
+  ];
 
   constructor(
     private router: Router,
     private dialog: MatDialog,
-    private recipeService: RecipeService,
   ) {}
 
   displayedColumns: string[] = ['name', 'date', 'view', 'delete'];
-  dataSource = new MatTableDataSource<Recipe>(this.userRecipes);
-
+  dataSource = new MatTableDataSource<Recipe>(this.savedRecipes);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   viewRecipe(recipe: Recipe) {
-    localStorage.setItem('recipeId', recipe.id.toString());
     this.router.navigate(['/recipe']);
   }
 
@@ -43,17 +55,6 @@ export class SavedRecipesComponent implements OnInit {
         this.delRecipe(recipe);
       }
     });
-  }
-
-  getUserRecipes(): void {
-    const savedUsername = localStorage.getItem('username') ?? 'User';
-    this.recipeService.getUserRecipes(savedUsername).subscribe(
-      (recipes) => {
-        this.userRecipes = recipes;
-        console.log(this.userRecipes);
-      },
-      (error) => {},
-    );
   }
 
   delRecipe(recipe: Recipe) {
