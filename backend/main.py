@@ -133,7 +133,7 @@ async def chat_endpoint(message: str):
     return {"response": response_text}
 
 
-@app.post("/recipes/")
+@app.post("/api/recipes/")
 async def create_recipe(recipe: RecipeCreate):
     db = SessionLocal()
     # Buscar el usuario por su nombre de usuario
@@ -154,7 +154,7 @@ async def create_recipe(recipe: RecipeCreate):
     return db_recipe
 
 
-@app.get("/recipes/{recipe_id}")
+@app.get("/api/recipes/{recipe_id}")
 async def get_recipe(recipe_id: int):
     db = SessionLocal()
     recipe = db.query(Recipe).filter(Recipe.id == recipe_id).first()
@@ -163,7 +163,7 @@ async def get_recipe(recipe_id: int):
     return recipe
 
 
-@app.get("/users/{username}/recipes/")
+@app.get("/api/users/{username}/recipes/")
 async def get_user_recipes(username: str):
     db = SessionLocal()
     user = db.query(User).filter(User.username == username).first()
@@ -177,7 +177,7 @@ async def get_user_recipes(username: str):
     return recipes
 
 
-@app.post("/users/")
+@app.post("/api/users/")
 async def create_user(user: UserCreate):
     db = SessionLocal()
 
@@ -196,7 +196,7 @@ async def create_user(user: UserCreate):
     return db_user
 
 
-@app.get("/users/{user_id}")
+@app.get("/api/users/{user_id}")
 async def get_user(user_id: int):
     db = SessionLocal()
     user = db.query(User).filter(User.id == user_id).first()
