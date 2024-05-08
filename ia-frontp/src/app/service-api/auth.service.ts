@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { PredictionModel } from '../models/prediction.model';
+import { environment} from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ export class AuthService {
    * The base URL for the API of backEnd.
    * @private
    */
-  private apiUrl = 'http://13.59.183.227:8000/';
+  private apiUrl = environment.apiUrl;
   formDataPrediction: PredictionModel = new PredictionModel();
 
   constructor(private http: HttpClient) {}
