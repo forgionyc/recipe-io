@@ -1,4 +1,5 @@
 name: Frontend Pipeline
+name: Frontend Pipeline
 
 on:
   push:
@@ -9,6 +10,7 @@ on:
       types: [opened, synchronize]
 
 jobs:
+  frontend_testing:
   frontend_testing:
     runs-on: ubuntu-latest
     steps:
