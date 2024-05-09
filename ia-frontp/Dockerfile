@@ -1,6 +1,5 @@
 # Use an official Node.js runtime as a base image
 FROM node:20-alpine as builder
-FROM node:20-alpine as builder
 
 # Set the working directory in the container
 WORKDIR /app
@@ -8,7 +7,6 @@ WORKDIR /app
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
-# Install Angular CLI globally
 # Install Angular CLI globally
 RUN npm install -g @angular/cli
 
