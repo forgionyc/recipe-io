@@ -1,9 +1,9 @@
 {
-    "family": "recipe_io_backend",
+    "family": "recipe_io_frontend",
     "containerDefinitions": [
         {
-            "name": "recipe_io_backend_image",
-            "image": "devtest95/recipe-io-app",
+            "name": "recipe_io_frontend_image",
+            "image": "devtest95/recipe-io",
             "cpu": 0,
             "portMappings": [
                 {
@@ -15,8 +15,8 @@
                 },
                 {
                     "name": "fast_api_",
-                    "containerPort": 8000,
-                    "hostPort": 8000,
+                    "containerPort": 8080,
+                    "hostPort": 8080,
                     "protocol": "tcp",
                     "appProtocol": "http"
                 }
@@ -27,6 +27,16 @@
             "mountPoints": [],
             "volumesFrom": [],
             "ulimits": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-create-group": "true",
+                    "awslogs-group": "/ecs/recipe_io_frontend",
+                    "awslogs-region": "us-east-2",
+                    "awslogs-stream-prefix": "ecs"
+                },
+                "secretOptions": []
+            },
             "systemControls": []
         }
     ],
@@ -35,11 +45,8 @@
     "requiresCompatibilities": [
         "FARGATE"
     ],
-    "cpu": "4096",
-    "memory": "8192",
-    "ephemeralStorage": {
-        "sizeInGiB": 25
-    },
+    "cpu": "2048",
+    "memory": "4096",
     "runtimePlatform": {
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"

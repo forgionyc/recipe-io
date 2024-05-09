@@ -28,14 +28,12 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 origins = [
     DEV_FRONT_URL,
     PROD_FRONT_URL,
-    "http://localhost",
-    "http://localhost:4200",
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    # allow_origins=origins,  # Reemplaza esto con el origen de tu aplicación Angular
+    # allow_origins=["*"],
+    allow_origins=origins,  # Reemplaza esto con el origen de tu aplicación Angular
     allow_credentials=True,
     allow_methods=[
         "GET",
